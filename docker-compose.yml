@@ -2,6 +2,7 @@ version: "3"
 services:
   backend:
     build: ./backend
+    image: impostermp/dev-ops:backend-latest 
     ports:
       - "9000:9000"
     environment:
@@ -10,6 +11,7 @@ services:
       - redis
   frontend:
     build: ./frontend
+    image: impostermp/dev-ops:frontend-latest 
     ports:
       - "8080:8080"
     environment:
