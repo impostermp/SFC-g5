@@ -1,21 +1,13 @@
 version: "3"
 services:
   backend:
-    build:
-      context: .
-      dockerfile: backend/Dockerfile
+    build: ./backend
     ports:
-      - "3000:3000"
-    volumes:
-      - ./backend:/app/backend
-    depends_on:
-      - frontend
+      - "9000:9000"
 
   frontend:
-    build:
-      context: .
-      dockerfile: frontend/Dockerfile
+    build: ./frontend
     ports:
-      - "80:80"
-    volumes:
-      - ./frontend:/app/frontend
+      - "8080:8080"
+    environment:
+      - BACKEND_DNS=backend
