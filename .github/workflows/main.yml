@@ -28,14 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name:  build backend
-      run: cd backend && docker build -t impostermp/dev-ops-backend:latest .
+      run: docker build -t impostermp/dev-ops-backend:latest .
   
 
   Build_frontend:
     runs-on: ubuntu-latest
     steps:
     - name:  build frontend
-      run: cd frontend && docker build -t impostermp/dev-ops-frontend:latest .
+      run: docker build -t impostermp/dev-ops-frontend:latest .
 
   Build:
     # The type of runner that the job will run on
