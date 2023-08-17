@@ -24,18 +24,15 @@ jobs:
       with:
         name: code
         path: .
-  Build_backend:
-    runs-on: ubuntu-latest
-    steps:
-    - name:  build backend
-      run: docker build -t impostermp/dev-ops-backend:latest .
-  
 
-  Build_frontend:
+  Build_docker:
+    needs: Build
     runs-on: ubuntu-latest
     steps:
-    - name:  build frontend
-      run: docker build -t impostermp/dev-ops-frontend:latest .
+    - name: build frontend
+      run: chmod +x ci/build-docker.sh && ci/build-docker.sh
+    - name: push docker
+      run: chmod +x ci/push-docker.sh && ci/push-docker.sh
 
   Build:
     # The type of runner that the job will run on
