@@ -20,4 +20,5 @@ jobs:
     steps:
     - name: Test frontend
       run: cd frontend && go test
+      #test
       #ny test
