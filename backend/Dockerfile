@@ -1,12 +1,10 @@
-FROM golang:1.16
+FROM golang:latest
 
-WORKDIR /app/backend
+WORKDIR /app
 
 COPY . .
 
-RUN apt-get update && apt-get install -y gcc
-
-RUN cd /app/backend && go build -o backend
+RUN go build -o backend
 
 # Set up the command to run the frontend application
-CMD [ "go run backend" ]
+CMD ["./backend"]
