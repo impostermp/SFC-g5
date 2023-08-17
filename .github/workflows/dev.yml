@@ -19,4 +19,4 @@ jobs:
     #Test
     steps:
     - name: Test frontend
-      run: pwd
+      run: cd frontend && go test
