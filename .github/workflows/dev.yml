@@ -1,4 +1,4 @@
-name: DEC_CI
+name: DEV_CI
 
 # Controls when the workflow will run
 on:
@@ -11,9 +11,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  
     # Steps represent a sequence of tasks that will be executed as part of the job
-  
-  
   Tests:
     runs-on: ubuntu-latest
     needs: [Build]
