@@ -11,4 +11,4 @@ RUN cd /app/frontend && go build frontend
 # Set up the command to run the frontend application
 CMD ["/app/frontend/frontend"]
 
-#Test
+#Test2
