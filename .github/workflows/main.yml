@@ -25,14 +25,14 @@ jobs:
         name: code
         path: .
 
-  Build_docker:
-    needs: Build
-    runs-on: ubuntu-latest
-    steps:
-    - name: build frontend
-      run: chmod +x ci/build-docker.sh && ci/build-docker.sh
-    - name: push docker
-      run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+#  Build_docker:
+ #   needs: Build
+ #   runs-on: ubuntu-latest
+ #   steps:
+  #  - name: build frontend
+ #     run: chmod +x ci/build-docker.sh && ci/build-docker.sh
+  #  - name: push docker
+  #    run: chmod +x ci/push-docker.sh && ci/push-docker.sh
 
   Build:
     # The type of runner that the job will run on
