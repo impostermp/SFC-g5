@@ -58,6 +58,4 @@ jobs:
         path: . 
     - name: Test frontend
       run: cd frontend && go test
-
-      #test
-      #yoyo
+      #ny test
