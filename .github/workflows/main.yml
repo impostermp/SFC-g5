@@ -58,4 +58,10 @@ jobs:
         path: . 
     - name: Test frontend
       run: cd frontend && go test
-      #ny test
+
+    #Build image
+  Build_frontend_image:
+    runs-on: ubuntu:latest
+    steps:
+    - name: Docker commands
+      run: cd frontend && docker build -t zackaad/frontend -f ./Dockerfile .
