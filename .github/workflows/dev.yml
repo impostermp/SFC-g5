@@ -13,16 +13,17 @@ on:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
   
-  
-  Tests:
-    runs-on: ubuntu-latest
-    needs: [Build]
-    steps:
-    - name: Download code
-      uses: actions/download-artifact@v3
-      with:
-        name: code
-        path: . 
-    - name: Test frontend
-      run: cd frontend && go test
-      #ny test
+  jobs:
+
+    Testing:
+      runs-on: ubuntu-latest
+      needs: [Build]
+      steps:
+      - name: Download code
+        uses: actions/download-artifact@v3
+        with:
+          name: code
+          path: . 
+      - name: Test frontend
+        run: cd frontend && go test
+        #ny test
