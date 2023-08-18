@@ -1,12 +1,12 @@
-name: CI
+name: DEVELOPMENT_CI
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "dev" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -67,31 +67,4 @@ jobs:
         path: . 
     - name: Test frontend
       run: cd frontend && go test
-
-
-    #Build image
-  Build_frontend_image:
-    runs-on: ubuntu-latest
-    needs: [Tests]
-    steps:
-    - name: Download code
-      uses: actions/download-artifact@v3
-      with:
-        name: code
-        path: . 
-    - name: Docker commands
-      run: cd frontend && docker build -t zackaad/frontend -f ./Dockerfile .
-
-  Build_backend_image:
-    runs-on: ubuntu-latest
-    needs: [Build_frontend_image]
-    steps:
-    - name: Download code
-      uses: actions/download-artifact@v3
-      with:
-        name: code
-        path: . 
-    - name: Docker commands
-      run: cd backend && docker build -t zackaad/backend -f ./Dockerfile .
-
       #ny test
