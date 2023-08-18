@@ -57,7 +57,7 @@ jobs:
         name: code
         path: .
     - name: build docker
-      run: chmod +x frontend/build.sh && frontend//build.sh
+      run: chmod +x frontend/build.sh && frontend/build.sh
     - name: push docker
       run: chmod +x frontend/push.sh && frontend/push.sh
   
