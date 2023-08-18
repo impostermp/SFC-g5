@@ -7,10 +7,16 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+<<<<<<< HEAD
 env: # Set the secret as an input
   docker_username: ${{ github.actor }}
   docker_password: ${{ secrets.GITHUB_TOKEN }}
   GIT_COMMIT: ${{ github.sha }}
+=======
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+>>>>>>> afcaf0b3982f95f08b60aac7ec752766e6017314
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -26,7 +32,21 @@ jobs:
         name: code
         path: .
 
+<<<<<<< HEAD
   Build:
+=======
+#  Build_docker:
+ #   needs: Build
+ #   runs-on: ubuntu-latest
+ #   steps:
+  #  - name: build frontend
+ #     run: chmod +x ci/build-docker.sh && ci/build-docker.sh
+  #  - name: push docker
+  #    run: chmod +x ci/push-docker.sh && ci/push-docker.sh
+
+  Build:
+    # The type of runner that the job will run on
+>>>>>>> afcaf0b3982f95f08b60aac7ec752766e6017314
     runs-on: ubuntu-latest
     needs: [Clone-down]
     steps:
@@ -44,6 +64,7 @@ jobs:
       with:
         name: code
         path: .
+<<<<<<< HEAD
 
   Docker-image-frontend:
     runs-on: ubuntu-latest
@@ -76,12 +97,18 @@ jobs:
       run: chmod +x backend/build.sh && backend/build.sh
     - name: push docker
       run: chmod +x backend/push.sh && backend/push.sh
+=======
+>>>>>>> afcaf0b3982f95f08b60aac7ec752766e6017314
       
 
     # Steps represent a sequence of tasks that will be executed as part of the job
   Tests:
     runs-on: ubuntu-latest
+<<<<<<< HEAD
     needs: [Docker-image-backend, Docker-image-frontend]
+=======
+    needs: [Build]
+>>>>>>> afcaf0b3982f95f08b60aac7ec752766e6017314
     steps:
     - name: Download code
       uses: actions/download-artifact@v3
@@ -91,3 +118,31 @@ jobs:
     - name: Test frontend
       run: cd frontend && go test
       #ny test
+<<<<<<< HEAD
+=======
+
+          #Build image
+  Build_frontend_image:
+    runs-on: ubuntu-latest
+    needs: [Tests]
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v3
+      with:
+        name: code
+        path: . 
+    - name: Docker commands
+      run: cd frontend && docker build -t zackaad/frontend -f ./Dockerfile .
+
+  Build_backend_image:
+    runs-on: ubuntu-latest
+    needs: [Build_frontend_image]
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v3
+      with:
+        name: code
+        path: . 
+    - name: Docker commands
+      run: cd backend && docker build -t zackaad/backend -f ./Dockerfile .
+>>>>>>> afcaf0b3982f95f08b60aac7ec752766e6017314
