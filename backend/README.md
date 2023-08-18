@@ -9,3 +9,4 @@ If redis is not running, you will get a `connection refused` error, don't worry 
 ## Environment Variables
 
 `REDIS_DNS` - DNS name of the redis server
+## just a funny comment
