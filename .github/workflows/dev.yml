@@ -1,4 +1,4 @@
-name: DEV_CI
+name: CI
 
 # Controls when the workflow will run
 on:
@@ -13,10 +13,49 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-# Steps represent a sequence of tasks that will be executed as part of the job
+  # This workflow contains a single job called "build"
+  Clone-down:
+    name: Clone down repo
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Upload Repo
+      uses: actions/upload-artifact@v3
+      with:
+        name: code
+        path: .
+  
+  Build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: [Clone-down]
+    steps:
+    - name: Download code
+      uses: actions/download-artifact@v3
+      with:
+        name: code
+        path: . 
+    - name: Build Frontend
+      run: cd frontend && go build frontend
+    - name: Build Backend
+      run: cd backend && go build backend 
+    - name: Upload Repo
+      uses: actions/upload-artifact@v3
+      with:
+        name: code
+        path: .
+      
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
   Tests:
     runs-on: ubuntu-latest
-    #Test
+    needs: [Build]
     steps:
+    - name: Download code
+      uses: actions/download-artifact@v3
+      with:
+        name: code
+        path: . 
     - name: Test frontend
-      run: ls
+      run: cd frontend && go test
+      #ny test
