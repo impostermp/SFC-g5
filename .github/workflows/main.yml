@@ -41,8 +41,6 @@ jobs:
       run: cd frontend && go build frontend
     - name: Build Backend
       run: cd backend && go build backend 
-    - name: Build with Gradle
-      run: chmod +x ci/build-app.sh && ci/build-app.sh
     - name: Upload Repo
       uses: actions/upload-artifact@v3
       with:
@@ -61,9 +59,9 @@ jobs:
         name: code
         path: .
     - name: build docker
-      run: chmod +x commands/build.sh && commands/build.sh
+      run: chmod +x build.sh && build.sh
     - name: push docker
-      run: chmod +x commands/push.sh && commands/push.sh
+      run: chmod +x push.sh && push.sh
       
 
     # Steps represent a sequence of tasks that will be executed as part of the job
