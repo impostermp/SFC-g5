@@ -57,9 +57,7 @@ jobs:
         name: code
         path: .
     - name: build docker
-      run: 
-        cd ..
-        chmod +x build.sh && build.sh
+      run:  cd .. && chmod +x build.sh && build.sh
     - name: push docker
       run: chmod +x push.sh && push.sh
       
