@@ -61,9 +61,9 @@ jobs:
         name: code
         path: .
     - name: build docker
-      run: chmod +x build.sh && build.sh
+      run: chmod +x commands/build.sh && commands/build.sh
     - name: push docker
-      run: chmod +x push.sh && push.sh
+      run: chmod +x commands/push.sh && commands/push.sh
       
 
     # Steps represent a sequence of tasks that will be executed as part of the job
