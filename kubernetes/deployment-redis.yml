@@ -1,23 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    run: redis
   name: redis
 spec:
-  replicas: 1  # You can adjust this as needed
+  replicas: 1
   selector:
     matchLabels:
-      app: redis
+      run: redis
   template:
     metadata:
       labels:
-        app: redis
+        run: redis
     spec:
       containers:
-        - name: redis
-          image: redis:latest
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-          ports:
-            - containerPort: 6379
+      - image: redis:latest
+        name: redis
+        ports:
+          - containerPort: 6379
+        resources: {}

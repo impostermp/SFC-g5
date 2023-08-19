@@ -1,26 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
   labels:
-    app: frontend
+    run: frontend
+  name: frontend
 spec:
-  replicas: 1  # Adjust as needed
+  replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      run: frontend
   template:
     metadata:
       labels:
-        app: frontend
+        run: frontend
     spec:
       containers:
-        - name: frontend
-          image: ghcr.io/impostermp/simple-fortune-cookie-frontend:latest
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+        - image: ghcr.io/impostermp/simple-fortune-cookie-frontend:1.0-d6d19776
+          name: simple-fortune-cookie-frontend-app
           env:
-          - name: BACKEND_DNS
-            value: backend
+            - name: BACKEND_DNS
+              value: backend
+            - name: BACKEND_PORT
+              value: '9000'
