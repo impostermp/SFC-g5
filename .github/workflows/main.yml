@@ -96,7 +96,7 @@ jobs:
     needs: [Docker-image-backend, Docker-image-frontend]
     steps:
       - name: Set up Kubectl
-        uses: azure/k8s-set-context@v1
+        uses: actions/checkout@v3
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
