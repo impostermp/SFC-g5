@@ -104,5 +104,5 @@ jobs:
       run:
         echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
     - name: deploy to cluster
-      run: kubectl --kubeconfig kubeconfig apply -f ./kubernetes
+      run: kubectl --kubeconfig kubeconfig apply -f kubernetes
       
