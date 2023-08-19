@@ -1,9 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: backend
+  labels:
+    app: backend
 spec:
-  replicas: 1
+  replicas: 1  # Adjust as needed
   selector:
     matchLabels:
       app: backend
@@ -15,8 +17,7 @@ spec:
       containers:
         - name: backend
           image: ghcr.io/impostermp/simple-fortune-cookie-backend:latest
-          ports:
-            - containerPort: 9000
-          env:
-            - name: REDIS_DNS
-              value: "redis"
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

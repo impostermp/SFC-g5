@@ -100,5 +100,9 @@ jobs:
       with:
         name: code
         path: . 
-    - name: Deploy kubernetes
-      run: kubectl apply -f ./kubernetes
+    - name: copy kubeconfig
+      run:
+        echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+    - name: deploy to cluster
+      run: kubectl --kubeconfig kubeconfig apply -f ./kubernetes
+      
