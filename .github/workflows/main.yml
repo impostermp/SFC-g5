@@ -90,4 +90,29 @@ jobs:
         path: . 
     - name: Test frontend
       run: cd frontend && go test
-      #ny test
+      
+  Kubernetes:
+    runs-on: ubuntu-latest
+    needs: [Docker-image-backend, Docker-image-frontend]
+    steps:
+      - name: Set up Kubectl
+        uses: actions/checkout@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+      - name: Deploy to cluster
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+          kubectl --kubeconfig kubeconfig apply -f kubernetes
+
+  Automated-Functional-Test:
+    runs-on: ubuntu-latest
+    needs: [Kubernetes]
+    steps:
+    - name: get code
+      uses: actions/checkout@v3
+      with:
+        name: code
+        path: .
+    - name: Run test script
+      run: chmod +x test_script.sh && ./test_script.sh
